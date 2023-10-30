@@ -15,6 +15,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
+.background-login {
+  background-color: #6D49F2;
+}
+
 .tim-row {
   margin-bottom: 20px;
 }

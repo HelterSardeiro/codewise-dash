@@ -56,11 +56,11 @@ function Admin(props) {
   const handleColorClick = (color) => {
     setBackgroundColor(color);
   };
+
   return (
     <div className="wrapper">
       <Sidebar {...props} routes={routes} backgroundColor={backgroundColor} />
       <div className="main-panel" ref={mainPanel}>
-        <DemoNavbar {...props} />
         <Routes>
           {routes.map((prop, key) => {
             return (
@@ -74,15 +74,10 @@ function Admin(props) {
           })}
           <Route
             path="/admin"
-            element={<Navigate to="/admin/dashboard" replace />}
+            element={<Navigate to="/dash/dashboard" replace />}
           />
         </Routes>
-        <Footer fluid />
       </div>
-      <FixedPlugin
-        bgColor={backgroundColor}
-        handleColorClick={handleColorClick}
-      />
     </div>
   );
 }
