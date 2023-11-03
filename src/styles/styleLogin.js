@@ -52,10 +52,14 @@ export const titleForm = styled.div`
 `;
 
 export const Form = styled.form`
-    margin-top: 40px;
+    margin-top: 20px;
     width: 80%;
     height: 100%;
     position: relative;
+
+    &.margin {
+        margin-bottom: 50px;
+    }
 `;
 
 export const labelForm = styled.label`
@@ -105,5 +109,13 @@ export const buttonForm = styled.input`
     &.register {
         bottom: -40px;
     }
+`;
+
+export const linkBox = styled.div`
+    margin-bottom: 10px;
+`
+
+export const link = styled.a`
+    margin-bottom: 10px;
 `;
 

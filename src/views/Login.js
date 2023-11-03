@@ -4,18 +4,25 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import * as S from "../styles/styleLogin";
 
 import { Context } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
+
   const { handleLogin } = useContext(Context);// eslint-disable-line no-unused-vars
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = React.useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    handleLogin(email, password)
+    const data = await handleLogin(email, password)
+
+    if (data) {
+      navigate('/dash')
+    }
   };
 
   return (
@@ -48,6 +55,7 @@ function LoginPage() {
             </S.labelForm>
             <S.buttonForm type="submit" value="Login" />
           </S.Form>
+          <S.linkBox>Ainda não possue conta? <S.link href="/auth/register">Registra-se</S.link></S.linkBox>
         </S.boxForm>
       </S.container>
     </S.bgAuth>

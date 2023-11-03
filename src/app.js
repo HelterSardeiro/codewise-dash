@@ -19,7 +19,7 @@ function App() {
                     </PrivateRoute>
                 } />
                 <Route path="/auth/*" element={<Auth />} />
-                <Route path="*" element={<Navigate to="/dash" replace />} />
+                <Route path="*" element={<Navigate to="/auth/login" replace />} />
             </Routes>
         </AuthProvider>
     );

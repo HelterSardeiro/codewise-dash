@@ -22,58 +22,39 @@ export default function useAuth() {
 
   async function handleLogin(username, password) {
 
-    console.log(username, password)
-
     try {
       const { data } = await api.post('/auth/login', {
         email: username,
         password
       });
 
-      console.log(data)
-
       setAuthenticated(true);
       Cookies.set("@token", data.data.accessToken);
       Cookies.set("@userId", data.data.payload.sub);
-      api.defaults.headers.Authorization = `Bearer ${data.accessToken}`;
+      api.defaults.headers.Authorization = `Bearer ${data.data.accessToken}`;
 
-      history.push(`/dash`);
-      window.location.reload();
+      return authenticated;
     } catch (err) {
       console.log(err)
       alert("Erro ao fazer login")
     }
   }
 
-  async function registerUser(name, user, email, password, confirmPassword, profileId) {
+  async function registerUser(name, email, password, cpf, address, phone) {
 
-    if (password === confirmPassword) {
-      try {
-        const { data } = await api.post('/auth/register', {
-          name,
-          user,
-          email,
-          password,
-          phone: "",
-          profile_id: profileId,
-          country: 'BRAZIL',
-          language: 'pt-BR',
-          currency: 'BRL',
-          status: 'active',
-          access: 'none',
-          tax: 12
-        })
+    try {
+      const { data } = await api.post('/auth/signup', {
+        name,
+        email,
+        password,
+        phone,
+        cpf,
+        address,
+      })
 
-
-      } catch (err) {
-        if (err.response.data.message.includes('Email')) {
-          return { msg: 2, color: 'danger' }
-        } else {
-          return { msg: 3, color: 'danger' }
-        }
-      }
-    } else {
-      return { msg: 4, color: 'danger' }
+      alert("Registro feito com sucesso")
+    } catch (err) {
+      alert("Erro ao fazer registro")
     }
   }
 
