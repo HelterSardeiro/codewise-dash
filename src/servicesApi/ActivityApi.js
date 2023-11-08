@@ -4,7 +4,7 @@ export class ActivityApi {
 
     getActivitys = async (setActivity) => {
         try {
-            const { data } = await api.get("activity/user/3")
+            const { data } = await api.get("activity/user/getActivity")
             setActivity(data)
         } catch {
             alert("Erro ao listar atividades")
