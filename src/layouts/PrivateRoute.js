@@ -1,15 +1,13 @@
 import { Navigate } from 'react-router-dom';
 import { Context } from '../context/AuthContext';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 function PrivateRoute({ children }) {
     const { authenticated } = useContext(Context);
-    const context = useContext(Context)
-
-    console.log(authenticated +"123", context)
 
     if (!authenticated) {
-        return <Navigate to="/auth/login"  />;
+        return <Navigate to="/auth/login" />;
     }
 
     return children

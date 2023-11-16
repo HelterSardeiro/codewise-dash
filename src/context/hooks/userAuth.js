@@ -11,14 +11,15 @@ export default function useAuth() {
   const [layout, setLayout] = useState("");
 
   useEffect(() => {
-    const token = Cookies.get('@token');
+    const token = Cookies.get('token');
 
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${token}`;
       setAuthenticated(true);
     }
+
     setLoading(false);
-  }, []);
+  }, [authenticated]);
 
   async function handleLogin(username, password) {
 
@@ -28,12 +29,12 @@ export default function useAuth() {
         password
       });
 
-      setAuthenticated(true);
-      Cookies.set("@token", data.data.accessToken);
+      Cookies.set("token", data.data.accessToken);
       Cookies.set("@userId", data.data.payload.sub);
       api.defaults.headers.Authorization = `Bearer ${data.data.accessToken}`;
+      setAuthenticated(true); // Defina o estado como true após uma autenticação bem-sucedida.
 
-      return authenticated;
+      return true;
     } catch (err) {
       console.log(err)
       alert("Erro ao fazer login")
@@ -60,14 +61,8 @@ export default function useAuth() {
 
   function handleLogout() {
     setAuthenticated(false);
-    Cookies.remove("@GLOBAL_TOKEN");
-    Cookies.remove("@GLOBAL_BALANCE");
-    Cookies.remove("@GLOBAL_TYPE");
-    Cookies.remove("@GLOBAL_USER");
-    Cookies.remove("@GLOBAL_WALLET");
-    Cookies.remove("@GLOBAL_USERNAME");
-    Cookies.remove("@GLOBAL_SERVICE_SALE");
-
+    Cookies.remove("token");
+    Cookies.remove("@userId");
     api.defaults.headers.Authorization = undefined;
     window.location.reload();
   }

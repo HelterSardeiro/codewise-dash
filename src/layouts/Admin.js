@@ -57,21 +57,28 @@ function Admin(props) {
     setBackgroundColor(color);
   };
 
+  const getRoutes = (router) => {
+    return router.map((prop, key) => {
+      if (prop.collapse) {
+        return getRoutes(prop.views);
+      }
+      return (
+        <Route
+          path={prop.path}
+          element={prop.component}
+          key={key}
+          exact
+        />
+      );
+    })
+  }
+
   return (
     <div className="wrapper">
       <Sidebar {...props} routes={routes} backgroundColor={backgroundColor} />
       <div className="main-panel" ref={mainPanel}>
         <Routes>
-          {routes.map((prop, key) => {
-            return (
-              <Route
-                path={prop.path}
-                element={prop.component}
-                key={key}
-                exact
-              />
-            );
-          })}
+          {getRoutes(routes)}
           <Route
             path="/admin"
             element={<Navigate to="/dash/dashboard" replace />}
