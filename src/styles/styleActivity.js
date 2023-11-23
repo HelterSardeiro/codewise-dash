@@ -136,6 +136,16 @@ export const BoxActivitys = styled.div`
     align-items: center;
     height: auto;
     min-height: 510px;
+
+    &.margin-bot {
+        margin-bottom: 150px;
+    }
+`;
+
+export const BoxGraphic = styled.div`
+    width: 80%;
+    height: 300px;
+    margin-bottom: 100px;
 `;
 
 export const CardActivitys = styled.div`
@@ -258,7 +268,12 @@ export const CardCode = styled.div`
 
 export const BoxCode = styled.div`
     height: auto;
-    width: 50%;
+    width: 100%;
+    padding: 0 10px 10px 10px;
+
+    div {
+        margin-bottom: 10px;
+    }
 `
 export const Form = styled.form`
     width: 100%;

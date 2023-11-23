@@ -6,9 +6,9 @@ import Cookies from 'js-cookie';
 function PrivateRoute({ children }) {
     const { authenticated } = useContext(Context);
 
-    if (!authenticated) {
-        return <Navigate to="/auth/login" />;
-    }
+    // if (!authenticated) {
+    //     return <Navigate to="/auth/login" />;
+    // }
 
     return children
 }

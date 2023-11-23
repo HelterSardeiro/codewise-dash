@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import * as S from "../../styles/styleActivity"
 
 import { ActivityApi } from "servicesApi/ActivityApi";
-import Cookies from "js-cookie";
 
 function FormActivity() {
   const activityApi = new ActivityApi();
@@ -12,7 +11,6 @@ function FormActivity() {
   const handleSubmit = (e) => {
     e.preventDefault(); 
     activityApi.createActivitys({
-      user_id: +Cookies.get('@userId'),
       code: code
     })
   };
