@@ -49,7 +49,7 @@ function MyActivitys() {
                             <S.Button
                                 backgroundColor="#2CA8FF"
                                 onClick={() => {
-                                    if (showAnalysis === false) {
+                                    if (showAnalysis === false || showAnalysis !== index) {
                                         setAnalysis({
                                             habilidade: [{ nome: "", nota: "" }],
                                             materia: "",

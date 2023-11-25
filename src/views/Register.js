@@ -85,7 +85,7 @@ function RegisterPage() {
                                 setAddress(e.target.value)
                             }} />
                         </S.labelForm>
-                        <S.buttonForm type="submit" value="Login" className="register" />
+                        <S.buttonForm type="submit" value="Cadastrar-se" className="register" />
                     </S.Form>
                     <div>Já possui conta? <S.link href="/auth/login">Fazer Login</S.link></div>
                 </S.boxForm>
