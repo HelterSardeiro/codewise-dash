@@ -2,7 +2,7 @@ import api from "services/api";
 
 export class ReportApi {
 
-    getReport = async (setReport, setLoading, setDataGraph) => {
+    getReport = async (setReport, setLoading, setDataGraph, toggleModal) => {
         setLoading(true)
 
         try {
@@ -26,7 +26,7 @@ export class ReportApi {
             setLoading(false)
         } catch {
             setLoading(false)
-            alert("Erro ao gerar relatório")
+            toggleModal()
         }
     }
 }

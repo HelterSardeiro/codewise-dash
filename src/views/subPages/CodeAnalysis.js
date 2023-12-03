@@ -3,10 +3,25 @@ import * as S from "../../styles/styleActivity"
 import { Bar } from 'react-chartjs-2';
 import { Col } from "reactstrap";
 import ReactLoading from 'react-loading';
+import Modal from 'react-modal';
 
 import { ReportApi } from "servicesApi/ReportApi";
+import { useNavigate } from "react-router-dom";
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '55%',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        width: "30%",
+        height: "30%",
+        boder: "1px solid #7B90B0"
+    },
+};
 
 function CodeAnalysis() {
+    const navigate = useNavigate();
     const reportApi = new ReportApi();
 
     const [report, setReport] = useState([{
@@ -47,6 +62,7 @@ function CodeAnalysis() {
     ]);
     const [loading, setLoading] = useState(false)
     const [showDetails, setShowDetails] = useState();
+    const [modalIsOpen, setIsOpen] = useState(false);
     const [dataGraph, setDataGraph] = useState({
         labels: [],
         datasets: [
@@ -75,8 +91,12 @@ function CodeAnalysis() {
         },
     };
 
+    function toggleModal() {
+        setIsOpen(true)
+    }
+
     useEffect(() => {
-        reportApi.getReport(setReport, setLoading, setDataGraph)
+        reportApi.getReport(setReport, setLoading, setDataGraph, toggleModal)
     }, [])
 
     return (
@@ -106,6 +126,25 @@ function CodeAnalysis() {
                             <S.BoxActivitys>
                                 {report.map((item, index) => (
                                     <>
+                                        <Modal
+                                            isOpen={modalIsOpen}
+                                            onRequestClose={toggleModal}
+                                            contentLabel="Example Modal"
+                                            style={customStyles}
+                                        >
+                                            <S.MessageModal>
+                                                Não foi possível gerar seu relatório no momento
+                                            </S.MessageModal>
+                                            <S.BoxButton>
+                                                <S.Button backgroundColor="#2CA8FF" onClick={() => {
+                                                    setIsOpen(false)
+                                                    reportApi.getReport(setReport, setLoading, setDataGraph, toggleModal)
+                                                }}>Tentar Novamente</S.Button>
+                                                <S.Button backgroundColor="#EF3434" onClick={() => {
+                                                    navigate('/dash')
+                                                }}>Tentar Mais Tarde</S.Button>
+                                            </S.BoxButton>
+                                        </Modal>
                                         <S.CardActivitys key={index}>
                                             <S.CardDate>
                                                 <S.Date>{item.relatorioCarreira.habilidades[0].nome}</S.Date>
@@ -155,7 +194,10 @@ function CodeAnalysis() {
                             </S.BoxActivitys>
                         </>
                     ) : (
-                        <div style={{ "width": "100%", "height": "100%", "display": "flex", "justifyContent": "center" }}>
+                        <div style={{ "width": "100%", "height": "100%", "display": "flex", "alignItems": "center", "flexDirection": "column", "marginTop": "15px" }}>
+                            <p style={{ "fontSize": "16px", "color": "#7B90B0", "fontWeight": "600" }}>
+                                Seu relátorio está sendo gerado, aguarde um momento...
+                            </p>
                             <ReactLoading type="spin" color="#7B90B0" height={'5%'} width={'5%'} />
                         </div>
                     )}

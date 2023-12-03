@@ -72,13 +72,21 @@ function MyActivitys() {
                     <S.CardCode key={index} className={showAnalysis === index && "show"}>
                         {!loading ? (
                             <S.BoxCode>
-                                <div><strong>Linguagem</strong>: {analysis.habilidade[0].nome}</div>
-                                <div><strong>Nota</strong>: {analysis.habilidade[0].nota}</div>
+                                <div><strong>Linguagem</strong> {analysis.habilidade.map(item => (
+                                    <S.BoxLanguage>
+                                        <div>
+                                            <strong>Nome</strong>: {item.nome}
+                                        </div>
+                                        <div>
+                                            <strong>Nota</strong>: {item.nota}
+                                        </div>
+                                    </S.BoxLanguage>
+                                ))}</div>
                                 <div><strong>Materia</strong>: {analysis.materia}</div>
                                 <div><strong>Feedback</strong>: {analysis.feedback}</div>
                             </S.BoxCode>
                         ) : (
-                            <div style={{"width": "100%", "height": "100%", "display": "flex", "justifyContent": "center" }}>
+                            <div style={{ "width": "100%", "height": "100%", "display": "flex", "justifyContent": "center" }}>
                                 <ReactLoading type="spin" color="#7B90B0" height={'5%'} width={'5%'} />
                             </div>
                         )}

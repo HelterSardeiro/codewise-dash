@@ -266,6 +266,12 @@ export const CardCode = styled.div`
     }
 `;
 
+export const BoxLanguage = styled.div`
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+`
+
 export const BoxCode = styled.div`
     height: auto;
     width: 100%;
@@ -281,7 +287,7 @@ export const Form = styled.form`
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
-`;  
+`;
 
 export const Label = styled.label`
     font-size: 16px;
@@ -302,7 +308,7 @@ export const TextArea = styled.textarea`
     :focus {
         outline: none;
     }
-`;  
+`;
 
 export const ButtonInput = styled.input`
     width: 150px;
@@ -318,4 +324,23 @@ export const ButtonInput = styled.input`
     :hover {
         cursor: pointer;
     }
+`;
+
+export const MessageModal = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    color: #7B90B0;
+    text-align: center;
+`;
+
+export const BoxButton = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: auto;
+    height: 60%;
+    align-items: flex-end;
+    justify-content: space-around;
 `;

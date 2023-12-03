@@ -64,7 +64,6 @@ export default function useAuth() {
     Cookies.remove("token");
     Cookies.remove("@userId");
     api.defaults.headers.Authorization = undefined;
-    window.location.reload();
   }
 
   return { authenticated, loading, layout, handleLogin, handleLogout, registerUser };
